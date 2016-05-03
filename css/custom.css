@@ -1,4 +1,22 @@
-.rowTopNumber {
+.rowTopNumber1 {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid grey;
+}
+
+.rowTopNumber2 {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid grey;
+}
+
+.rowTopNumber3 {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid grey;
+}
+
+.rowTopNumber4 {
   padding: 20px;
   text-align: center;
   border: 1px solid grey;
