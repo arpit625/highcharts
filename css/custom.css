@@ -1,0 +1,12 @@
+.rowTopNumber {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid grey;
+}
+
+.chartBox {
+  padding: 10px;
+  margin-left: 0px;
+  text-align: center;
+  border: 1px solid grey;
+}
