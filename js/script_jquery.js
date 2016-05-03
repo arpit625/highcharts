@@ -1,8 +1,11 @@
 $( document ).ready(function() {
-	
+
 	console.log( "ready123!" );
 
 	$(".rowTopNumber").html("<h3>349</h3>");
+
+    callAjax(servervalue);
+
 
 	columnchart("#chart1");
 	barchart("#chart2");
@@ -10,3 +13,8 @@ $( document ).ready(function() {
 	scatterchart("#chart4");
 
 });
+
+function callAjax() {
+
+	
+}
