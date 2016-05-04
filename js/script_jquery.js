@@ -14,7 +14,7 @@ $( document ).ready(function() {
 	*/
 	// $("#testing").text("Welcome "+allData.Discount);
 
-	scatterchart("#chart4");
+	// scatterchart("#chart4");
 
 });
 
@@ -32,6 +32,8 @@ function callAjax() {
 			piechart("#chart1", allData, allData.pie);
 			columnchart("#chart2", allData, allData.category,'Sales by Category', 'Subtitle goes here');
 			columnchart("#chart3", allData, allData.sub_category,'Sales by Sub-Category', 'Subtitle goes here');
+			scatterchart("#chart4", allData, allData.scatter);
+
 
     }).fail(function (dt) {
     	$("#testing").text("Failed");
