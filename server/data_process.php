@@ -38,12 +38,30 @@ if ($result->num_rows > 0) {
 
         $final = array('Sales' => $row["Sales"], 'Quantity' =>  $row["Quantity"], 'Discount' => $row["Discount"], 'Profit' => $row["Profit"]);
     }
-} else {
-    echo "No";
 }
 
+$output = array();
+// $output['name'] = 'Category';
+// Get processed data
+$sql = "Select 	Category, SUM(Sales) as Sales from test.sales group by Category";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+    	$value_obj = array();
+    	$value_obj['name'] = $row["Category"];
+    	$value_obj['y'] = $row["Sales"];
+
+    	array_push($output, $value_obj);        
+    }
+}
+
+$final['pie'] = $output;
+
 // echo ($final);
-echo json_encode($final);
+echo json_encode($final, JSON_NUMERIC_CHECK);
+// echo json_encode($output, JSON_NUMERIC_CHECK);
 
 $conn->close();
 

@@ -4,8 +4,6 @@ $( document ).ready(function() {
 
 	console.log( "ready123!" );
 
-	// $(".rowTopNumber").html("<h3>349</h3>");
-
 	callAjax();
 
 	/*
@@ -16,9 +14,8 @@ $( document ).ready(function() {
 	*/
 	// $("#testing").text("Welcome "+allData.Discount);
 
-	columnchart("#chart1");
-	barchart("#chart2");
-	piechart("#chart3");
+	columnchart("#chart2");
+	barchart("#chart3");
 	scatterchart("#chart4");
 
 });
@@ -33,23 +30,19 @@ function callAjax() {
     }).done(function (dt) {
         	allData = dt;
 
-            // $("#testing").text("Welcome "+dt.Sales);
-			// $("#testing").text("Welcome "+allData.Discount);
-
 			setValues();
+			piechart("#chart1", allData);
 
     }).fail(function (dt) {
     	$("#testing").text("Failed");
-
-
 
     });
 }
 
 function setValues() {
-	$(".rowTopNumber1").text(allData.Sales);
-	$(".rowTopNumber2").text(allData.Quantity);
-	$(".rowTopNumber3").text(allData.Discount);
-	$(".rowTopNumber4").text(allData.Profit);
-
+	$(".rowTopNumber1").text((allData.Sales).toFixed(2));
+	$(".rowTopNumber2").text((allData.Quantity).toFixed(0));
+	$(".rowTopNumber3").text((allData.Discount).toFixed(2));
+	$(".rowTopNumber4").text((allData.Profit).toFixed(2));
 }
+
