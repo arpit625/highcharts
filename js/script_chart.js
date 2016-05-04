@@ -228,7 +228,7 @@ function columnchart(id, allData, columnData, title, subtitle) {
         yAxis: {
             min: 0,
             title: {
-                text: 'Rainfall (mm)'
+                text: 'Sales (in $)'
             }
         },
         tooltip: {

@@ -58,31 +58,40 @@ if ($result->num_rows > 0) {
 
 $final['pie'] = $output;
 
-// Generate Bar chart Data
+// Generate Category Bar chart Data
 $output = array();
 $output['name'] = 'Category';
-$listCategory = "";
 $sql = "Select 	Category, SUM(Sales) as Sales from test.sales group by Category";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-    	if($listCategory != "") {
-    		$listCategory .= ",";
-    	}
-    	// $listCategory .=   $row["Category"] ;
 		$output['xAxis'][] = $row['Category'];
-
-    	// $listCategory .=  "'" . $row["Category"] . "'";
     	$output['data'][] = $row["Sales"];
-
-    	// array_push($output, $value_obj);        
     }
 }
 // $output['xAxis'][] = $listCategory;
 
 $final['category'] = $output;
+
+
+// Generate Sub-Category Bar chart Data
+$output = array();
+$output['name'] = 'Sub-Category';
+$sql = "Select 	Sub_Category, SUM(Sales) as Sales from test.sales group by Sub_Category";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+		$output['xAxis'][] = $row['Sub_Category'];
+    	$output['data'][] = $row["Sales"];
+    }
+}
+// $output['xAxis'][] = $listCategory;
+
+$final['sub_category'] = $output;
 
 
 
