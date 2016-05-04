@@ -40,17 +40,16 @@ if ($result->num_rows > 0) {
     }
 }
 
+// Generate pie chart data
 $output = array();
-// $output['name'] = 'Category';
-// Get processed data
-$sql = "Select 	Category, SUM(Sales) as Sales from test.sales group by Category";
+$sql = "Select 	Region, SUM(Sales) as Sales from test.sales group by Region";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
     	$value_obj = array();
-    	$value_obj['name'] = $row["Category"];
+    	$value_obj['name'] = $row["Region"];
     	$value_obj['y'] = $row["Sales"];
 
     	array_push($output, $value_obj);        
@@ -59,8 +58,38 @@ if ($result->num_rows > 0) {
 
 $final['pie'] = $output;
 
+// Generate Bar chart Data
+$output = array();
+$output['name'] = 'Category';
+$listCategory = "";
+$sql = "Select 	Category, SUM(Sales) as Sales from test.sales group by Category";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+    	if($listCategory != "") {
+    		$listCategory .= ",";
+    	}
+    	// $listCategory .=   $row["Category"] ;
+		$output['xAxis'][] = $row['Category'];
+
+    	// $listCategory .=  "'" . $row["Category"] . "'";
+    	$output['data'][] = $row["Sales"];
+
+    	// array_push($output, $value_obj);        
+    }
+}
+// $output['xAxis'][] = $listCategory;
+
+$final['category'] = $output;
+
+
+
 // echo ($final);
 echo json_encode($final, JSON_NUMERIC_CHECK);
+// echo json_encode($output, JSON_NUMERIC_CHECK);
+// echo "<br>";
 // echo json_encode($output, JSON_NUMERIC_CHECK);
 
 $conn->close();

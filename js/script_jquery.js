@@ -14,8 +14,9 @@ $( document ).ready(function() {
 	*/
 	// $("#testing").text("Welcome "+allData.Discount);
 
-	columnchart("#chart2");
-	barchart("#chart3");
+	// barchart("#chart2");
+	// columnchart("#chart2");
+	// columnchart("#chart3");
 	scatterchart("#chart4");
 
 });
@@ -31,7 +32,8 @@ function callAjax() {
         	allData = dt;
 
 			setValues();
-			piechart("#chart1", allData);
+			piechart("#chart1", allData, allData.pie);
+			columnchart("#chart2", allData, allData.category,'Sales by Category', 'Subtitle goes here');
 
     }).fail(function (dt) {
     	$("#testing").text("Failed");
