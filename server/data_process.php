@@ -94,10 +94,25 @@ if ($result->num_rows > 0) {
 $final['sub_category'] = $output;
 
 
+/*// Generate Sub-Category Bar chart Data
+$output = array();
+$output['name'] = 'Sub-Category';
+$sql = "Select 	Segment, State, SUM(Sales) as Sales, AVG(Discout) as Discout from test.sales group by Segment, State";
+$result = $conn->query($sql);
 
-// echo ($final);
-echo json_encode($final, JSON_NUMERIC_CHECK);
-// echo json_encode($output, JSON_NUMERIC_CHECK);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+		$output['xAxis'][] = $row['Sub_Category'];
+    	$output['data'][] = $row["Sales"];
+    }
+}
+// $output['xAxis'][] = $listCategory;
+
+$final['sub_category'] = $output;*/
+
+
+echo json_encode($final, JSON_NUMERIC_CHECK );
 // echo "<br>";
 // echo json_encode($output, JSON_NUMERIC_CHECK);
 

@@ -14,9 +14,6 @@ $( document ).ready(function() {
 	*/
 	// $("#testing").text("Welcome "+allData.Discount);
 
-	// barchart("#chart2");
-	// columnchart("#chart2");
-	// columnchart("#chart3");
 	scatterchart("#chart4");
 
 });
