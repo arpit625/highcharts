@@ -1,7 +1,5 @@
 # highcharts
 
-# highcharts
-
 Current Version : 
 - All data processing in the backend
 - Normal UI
