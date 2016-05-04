@@ -174,7 +174,7 @@ function scatterchart(id) {
 
 }
 
-function piechart(id, allData) {
+function piechart(id, allData, pieData) {
 
    $(id).highcharts({
     chart: {
@@ -205,37 +205,24 @@ function piechart(id, allData) {
     series: [{
         name: 'Brands',
         colorByPoint: true,
-        data : allData.pie
+        data : pieData
     }]
 });
 }
 
-function columnchart(id) {
+function columnchart(id, allData, columnData, title, subtitle) {
     $(id).highcharts({
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Monthly Average Rainfall'
+            text: title
         },
         subtitle: {
-            text: 'Source: WorldClimate.com'
+            text: subtitle
         },
         xAxis: {
-            categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-            ],
+            categories: columnData.xAxis,
             crosshair: true
         },
         yAxis: {
@@ -247,7 +234,7 @@ function columnchart(id) {
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -259,9 +246,8 @@ function columnchart(id) {
             }
         },
         series: [{
-            name: 'Tokyo',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
+            name: columnData.name,
+         data: columnData.data
         }]
     });
 }
@@ -320,12 +306,6 @@ function barchart(id) {
      series: [{
          name: 'Year 1800',
          data: [107, 31, 635, 203, 2]
-     }, {
-         name: 'Year 1900',
-         data: [133, 156, 947, 408, 6]
-     }, {
-         name: 'Year 2012',
-         data: [1052, 954, 4250, 740, 38]
      }]
  });
 }
