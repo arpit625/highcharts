@@ -42,9 +42,9 @@ function callAjax() {
 }
 
 function setValues() {
-	$(".rowTopNumber1").text((allData.Sales).toFixed(2));
+	$(".rowTopNumber1").text((allData.Sales).toFixed(0));
 	$(".rowTopNumber2").text((allData.Quantity).toFixed(0));
-	$(".rowTopNumber3").text((allData.Discount).toFixed(2));
-	$(".rowTopNumber4").text((allData.Profit).toFixed(2));
+	$(".rowTopNumber3").text(((allData.Discount)*100).toFixed(0) + "%");
+	$(".rowTopNumber4").text((allData.Profit).toFixed(0));
 }
 
