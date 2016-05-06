@@ -1,11 +1,11 @@
-function mapsChart(id) {
+function mapsChart(id, allData, mapsData) {
 
 
         // Instanciate the map
         $(id).highcharts('Map', {
 
             chart : {
-                borderWidth : 1
+                borderWidth : 0
             },
 
             title : {
@@ -41,19 +41,8 @@ function mapsChart(id) {
                 animation: {
                     duration: 1000
                 },
-                data : [
-                    {
-                        "value": 438,
-                        "code": "NJ"
-                    },
-                    {
-                        "value": 387.35,
-                        "code": "RI"
-                    },
-                    {
-                        "value": 30.75,
-                        "code": "TX"
-                    }],
+                data : mapsData,
+
                 mapData: Highcharts.maps['countries/us/us-all'],
                 joinBy: ['postal-code', 'code'],
                 dataLabels: {
@@ -63,7 +52,7 @@ function mapsChart(id) {
                 },
                 name: 'Population density',
                 tooltip: {
-                    pointFormat: '{point.code}: {point.value}/km²'
+                    pointFormat: '{point.code}: {point.value:.2f}/km²'
                 }
             }]
         });

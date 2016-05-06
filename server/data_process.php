@@ -111,7 +111,7 @@ if ($result->num_rows > 0) {
 
 $final['sub_category'] = $output;*/
 
-// Generate pie chart data
+// Generate Scatter chart data
 $output = array();
 $value_obj = array();
 // $sql = "Select 	Region, SUM(Sales) as Sales from test.sales group by Region";
@@ -130,14 +130,31 @@ if ($result->num_rows > 0) {
     	// array_push($output, $value_obj);        
     }
 }
-    	array_push($output, $value_obj);        
+array_push($output, $value_obj);        
 
 $final['scatter'] = $output;
 
 
+// Generate Maps data
+$output = array();
+$sql = "Select  State_code, SUM(Sales) as Sales from test.sales group by State_code";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $value_obj = array();
+        $value_obj['code'] = $row["State_code"];
+        $value_obj['value'] = $row["Sales"];
+
+        array_push($output, $value_obj);        
+    }
+}
+
+$final['maps'] = $output;
+
 echo json_encode($final, JSON_NUMERIC_CHECK );
 /*echo "<br>";
-echo "<br>";
 echo "<br>";
 // echo json_encode($output, JSON_NUMERIC_CHECK);
 echo json_encode($output, JSON_NUMERIC_CHECK);*/

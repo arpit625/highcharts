@@ -33,7 +33,7 @@ function callAjax() {
 			columnchart("#chart2", allData, allData.category,'Sales by Category', 'Subtitle goes here');
 			columnchart("#chart3", allData, allData.sub_category,'Sales by Sub-Category', 'Subtitle goes here');
 			scatterchart("#chart4", allData, allData.scatter);
-			mapsChart("#maps_container");
+			mapsChart("#maps_container", allData, allData.maps);
 
 
     }).fail(function (dt) {
