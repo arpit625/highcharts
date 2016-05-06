@@ -15,6 +15,13 @@
 	<script type="text/javascript" src="js/script_jquery.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
+
+	<!-- HighMaps Libraries -->
+	<!-- <script src="https://code.highcharts.com/maps/highmaps.js"></script> -->
+	<script src="http://code.highcharts.com/maps/modules/map.js"></script>
+	<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+	<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>s
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
@@ -180,6 +187,13 @@
 
 		<div class="row">
 
+<!-- 		<div class="col-md-12">
+			<div id="maps_container"> Hello </div>
+			World
+		</div> -->
+
+
+
 			<div class="col-md-6">
 				<div class="box box-default uncollapsed-box">
 					<div class="box-header with-border">
@@ -261,6 +275,26 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="chartBox" id="chart4"></div> 
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- /.box -->
+			</div>
+
+			<div class="col-md-12">
+				<div class="box box-default uncollapsed-box">
+					<div class="box-header with-border">
+						<h3 class="box-title">US Map</h3>
+
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+							</button>
+						</div>
+						<!-- /.box-tools -->
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="chartBox" id="maps_container"></div> 
 					</div>
 					<!-- /.box-body -->
 				</div>
