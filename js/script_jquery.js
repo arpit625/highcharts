@@ -22,18 +22,18 @@ $( document ).ready(function() {
 function callAjax() {
 	$.ajax({
 		type: 'GET',
-		url: "server/data_process.php",
+		url: "server/data_fetch.php",
         contentType: 'application/json; charset=utf-8',
         dataType: 'json'
     }).done(function (dt) {
         	allData = dt;
 
 			setValues();
-			piechart("#chart1", allData, allData.pie);
-			columnchart("#chart2", allData, allData.category,'Sales by Category', 'Subtitle goes here');
-			columnchart("#chart3", allData, allData.sub_category,'Sales by Sub-Category', 'Subtitle goes here');
-			scatterchart("#chart4", allData, allData.scatter);
-			mapsChart("#maps_container", allData, allData.maps);
+			// piechart("#chart1", allData, allData.pie);
+			// columnchart("#chart2", allData, allData.category,'Sales by Category', 'Subtitle goes here');
+			// columnchart("#chart3", allData, allData.sub_category,'Sales by Sub-Category', 'Subtitle goes here');
+			// scatterchart("#chart4", allData, allData.scatter);
+			// mapsChart("#maps_container", allData, allData.maps);
 
 
     }).fail(function (dt) {
@@ -43,9 +43,68 @@ function callAjax() {
 }
 
 function setValues() {
-	$(".rowTopNumber1").text((allData.Sales).toFixed(0));
+
+	salesValue = getSales();
+	quantityValue = getQuantity();
+	discountValue = getDiscount();
+	profitValue = getProfit();
+
+/*  $(".rowTopNumber1").text((allData.Sales).toFixed(0));
 	$(".rowTopNumber2").text((allData.Quantity).toFixed(0));
 	$(".rowTopNumber3").text(((allData.Discount)*100).toFixed(0) + "%");
-	$(".rowTopNumber4").text((allData.Profit).toFixed(0));
+	$(".rowTopNumber4").text((allData.Profit).toFixed(0));*/
+	$(".rowTopNumber1").text(salesValue);
+	$(".rowTopNumber2").text(quantityValue);
+	$(".rowTopNumber3").text(discountValue);
+	$(".rowTopNumber4").text(profitValue);
 }
 
+function getSales() {
+
+	 var sum = 0;
+
+    $.each(allData, function () {
+        sum = sum + this["Sales"];
+    });
+
+    return parseFloat(sum).toFixed(0);
+
+}
+
+function getQuantity() {
+
+	 var sum = 0;
+
+    $.each(allData, function () {
+        sum = sum + this["Quantity"];
+    });
+
+    return parseFloat(sum).toFixed(0);
+
+}
+
+function getDiscount() {
+
+	 var sum = 0;
+	 var count = 0;
+
+    $.each(allData, function () {
+        sum = sum + this["Discount"];
+        count = count + 1;
+    });
+
+    return (parseFloat(sum)*100/count).toFixed(0) + " %";
+
+}
+
+function getProfit() {
+
+	 var sum = 0;
+
+    $.each(allData, function () {
+        sum = sum + this["Profit"];
+    });
+
+    return parseFloat(sum).toFixed(0);
+
+}
