@@ -165,38 +165,26 @@ function getScatterChartData(data, columnName, xLegend, yLegend) {
             .ToArray();
 
     columnData = {};
-    columnData.Consumer = {};
-    columnData.Corporate = {};
-    columnData["Home Office"] = {};
-
-    columnData.Consumer.data = [];
-    columnData.Corporate.data = [];
-    columnData["Home Office"].data = [];
-    // columnData.name = "Category";
 
         $.each(aggregatedObject, function () {
-            // columnData[this["name"]]["data"].push[this["y"]]
-            // columnData[this["name"]][name] = this["name"];
-            // columnData.push[this["name"]];
-            // columnData.this["name"].data = array(this["x"], this["y"]);
             values = this["name"];
+            if( !columnData[values]){
+                columnData[values] = {};
+                columnData[values].data = [];
+            }
+
             columnData[values]["name"] = values;
             dataVal = [];
             dataVal.push(this["x"]);
             dataVal.push(this["y"]);
-            // columnData[values]["data"] = [];
             columnData[values]["data"].push(dataVal);
-            // columnData[values]["data"] = dataVal;
 
         });
 
 
     // console.log(aggregatedObject);
-    console.log(columnData);
+    // console.log(columnData);
     return columnData;
-    // console.log(aggregatedObject.length);
-
-
 }
 
 function piechart(id, data, columnName) {
