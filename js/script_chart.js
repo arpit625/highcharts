@@ -129,7 +129,11 @@ function scatterchart(id, allData, scatterData) {
 
 }
 
-function piechart(id, allData, pieData) {
+function piechart(id, data, columnName) {
+
+    pieData = getPieChartData(data, columnName);
+    // console.log(pieData);
+
 
    $(id).highcharts({
     chart: {
@@ -163,6 +167,23 @@ function piechart(id, allData, pieData) {
         data : pieData
     }]
 });
+}
+
+function getPieChartData(data, columnName) {
+
+    var aggregatedObject = Enumerable.From(data)
+        .GroupBy("$." + columnName, null,
+                 function (key, g) {
+                     return {
+                       name: key,
+                       y: g.Sum("$.Sales")
+                     }
+        })
+        .ToArray();
+
+return aggregatedObject;
+// console.log(aggregatedObject);
+
 }
 
 function columnchart(id, allData, columnData, title, subtitle) {

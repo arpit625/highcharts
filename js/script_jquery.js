@@ -29,6 +29,8 @@ function callAjax() {
         	allData = dt;
 
 			setValues(allData);
+
+			drawCharts(allData);
 			// piechart("#chart1", allData, allData.pie);
 			// columnchart("#chart2", allData, allData.category,'Sales by Category', 'Subtitle goes here');
 			// columnchart("#chart3", allData, allData.sub_category,'Sales by Sub-Category', 'Subtitle goes here');
@@ -49,12 +51,16 @@ function setValues(data) {
 	discountValue = getDiscount(data);
 	profitValue = getProfit(data);
 
-
 	$(".rowTopNumber1").text(salesValue);
 	$(".rowTopNumber2").text(quantityValue);
 	$(".rowTopNumber3").text(discountValue);
 	$(".rowTopNumber4").text(profitValue);
 }
+
+function drawCharts(data) {
+	piechart("#chart1", data, "Category");
+}
+
 
 function getSales(data) {
 
