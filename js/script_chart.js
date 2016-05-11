@@ -1,4 +1,6 @@
-function mapsChart(id, allData, mapsData) {
+function mapsChart(id, data) {
+
+    mapsData = getMapChartData(data);
 
 
         // Instanciate the map
@@ -58,7 +60,27 @@ function mapsChart(id, allData, mapsData) {
         });
 };
 
-function scatterchart(id, allData, scatterData) {
+function getMapChartData(data) {
+
+        var aggregatedObject = Enumerable.From(data)
+            .GroupBy("$.State_Code", null,
+                     function (key, g) {
+                         return {
+                           code: key,
+                           value: g.Sum("$.Sales")
+                         }
+            })
+            .ToArray();
+
+    return aggregatedObject;
+
+}
+
+function scatterchart(id, data, columnName, xLegend, yLegend) {
+
+    scatterData = getScatterChartData(data, columnName, xLegend, yLegend);
+
+
     $(id).highcharts({
         chart: {
             type: 'scatter',
@@ -121,11 +143,36 @@ function scatterchart(id, allData, scatterData) {
         series: [ 
         scatterData[0].Consumer,
         scatterData[0].Corporate,
-        scatterData[0]['Home Office']
+        scatterData[0]['Home Office'
+        ]
         // scatterData.Corporate
       
         ]
     });
+
+}
+
+function getScatterChartData(data, columnName, xLegend, yLegend) {
+
+    var aggregatedObject = Enumerable.From(data)
+        // .GroupBy("{ col: $." + columnName + ", x: $." + xLegend + ", y: $." + yLegend + ", state: $.State_Code" + "}", null,
+        // .GroupBy("{ col: $." + columnName + ", state: $.State_Code" + "}", null,
+        .GroupBy("$.State_Code", null,
+        // .GroupBy("$." + columnName, null,
+                 function (key, g) {
+                     return {
+                       // col: key.col,
+                       state: key,
+                       y: g.Sum("$.Sales")
+                       // y: g.Sum("$.Sales")
+                     }
+        })
+        .ToArray();
+
+    columnData = {};
+    console.log(aggregatedObject);
+    // console.log(aggregatedObject.length);
+
 
 }
 
