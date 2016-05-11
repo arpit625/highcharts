@@ -186,7 +186,10 @@ return aggregatedObject;
 
 }
 
-function columnchart(id, allData, columnData, title, subtitle) {
+function columnchart(id, data, columnName, title, subtitle) {
+
+    columnData = getColumnChartData(data, columnName);
+
     $(id).highcharts({
         chart: {
             type: 'column'
@@ -226,6 +229,38 @@ function columnchart(id, allData, columnData, title, subtitle) {
          data: columnData.data
         }]
     });
+}
+
+function getColumnChartData(data, columnName) {
+
+    var aggregatedObject = Enumerable.From(data)
+        .GroupBy("$." + columnName, null,
+                 function (key, g) {
+                     return {
+                       name: key,
+                       y: g.Sum("$.Sales")
+                     }
+        })
+        .ToArray();
+
+    columnData = {};
+    columnData.name = "Category";
+
+    xAxis = [];
+    data = [];
+
+        $.each(aggregatedObject, function () {
+            xAxis.push(this["name"]);
+            data.push(this["y"]);
+        });
+
+    columnData.xAxis = xAxis;
+    columnData.data = data;
+
+    return columnData;
+
+// console.log(columnData);
+
 }
 
 function barchart(id) {

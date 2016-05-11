@@ -58,7 +58,12 @@ function setValues(data) {
 }
 
 function drawCharts(data) {
-	piechart("#chart1", data, "Category");
+	piechart("#chart1", data, "Region");
+	columnchart("#chart2", data, "Category", 'Sales by Category', 'Subtitle goes here');
+	columnchart("#chart3", data, "Sub_Category", 'Sales by Sub-Category', 'Subtitle goes here');
+	// columnchart("#chart3", allData, allData.sub_category,'Sales by Sub-Category', 'Subtitle goes here');
+
+
 }
 
 
