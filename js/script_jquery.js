@@ -61,7 +61,7 @@ function drawCharts(data) {
 	piechart("#chart1", data, "Region");
 	columnchart("#chart2", data, "Category", 'Sales by Category', 'Subtitle goes here');
 	columnchart("#chart3", data, "Sub_Category", 'Sales by Sub-Category', 'Subtitle goes here');
-	// scatterchart("#chart4", data, "Segment", "Sales", "Discount");
+	scatterchart("#chart4", data, "Segment", "Sales", "Discount");
 	mapsChart("#maps_container", data);
 
 

@@ -141,12 +141,10 @@ function scatterchart(id, data, columnName, xLegend, yLegend) {
             }
         },
         series: [ 
-        scatterData[0].Consumer,
-        scatterData[0].Corporate,
-        scatterData[0]['Home Office'
-        ]
-        // scatterData.Corporate
-      
+        // {"name":"Consumer","data":[[7537.5400109291,0],[16424.421979189,0.31545454521071]]}
+                    scatterData.Consumer,
+                    scatterData.Corporate,
+                    scatterData['Home Office']
         ]
     });
 
@@ -154,23 +152,48 @@ function scatterchart(id, data, columnName, xLegend, yLegend) {
 
 function getScatterChartData(data, columnName, xLegend, yLegend) {
 
-    var aggregatedObject = Enumerable.From(data)
-        // .GroupBy("{ col: $." + columnName + ", x: $." + xLegend + ", y: $." + yLegend + ", state: $.State_Code" + "}", null,
-        // .GroupBy("{ col: $." + columnName + ", state: $.State_Code" + "}", null,
-        .GroupBy("$.State_Code", null,
-        // .GroupBy("$." + columnName, null,
-                 function (key, g) {
-                     return {
-                       // col: key.col,
-                       state: key,
-                       y: g.Sum("$.Sales")
-                       // y: g.Sum("$.Sales")
-                     }
-        })
-        .ToArray();
+// Overload:function(keySelector,elementSelector,resultSelector,compareSelector)
+
+        var aggregatedObject = Enumerable.From(data)
+        .GroupBy(
+            "{ col: $." + columnName + ", state: $.State_Code" + "}",
+            // "{ col: $.Segment, state: $.State_Code}",
+             "{Sales: $.Sales, Discount: $.Discount}",
+             "{name: $.col, State: $.state, x: $$.Sum('$.Sales'), y: $$.Average('$.Discount') }",
+             "$.col + ' ' + $.state"
+                     )
+            .ToArray();
 
     columnData = {};
-    console.log(aggregatedObject);
+    columnData.Consumer = {};
+    columnData.Corporate = {};
+    columnData["Home Office"] = {};
+
+    columnData.Consumer.data = [];
+    columnData.Corporate.data = [];
+    columnData["Home Office"].data = [];
+    // columnData.name = "Category";
+
+        $.each(aggregatedObject, function () {
+            // columnData[this["name"]]["data"].push[this["y"]]
+            // columnData[this["name"]][name] = this["name"];
+            // columnData.push[this["name"]];
+            // columnData.this["name"].data = array(this["x"], this["y"]);
+            values = this["name"];
+            columnData[values]["name"] = values;
+            dataVal = [];
+            dataVal.push(this["x"]);
+            dataVal.push(this["y"]);
+            // columnData[values]["data"] = [];
+            columnData[values]["data"].push(dataVal);
+            // columnData[values]["data"] = dataVal;
+
+        });
+
+
+    // console.log(aggregatedObject);
+    console.log(columnData);
+    return columnData;
     // console.log(aggregatedObject.length);
 
 
@@ -304,6 +327,7 @@ function getColumnChartData(data, columnName) {
     columnData.xAxis = xAxis;
     columnData.data = data;
 
+// console.log(aggregatedObject);
     return columnData;
 
 // console.log(columnData);
