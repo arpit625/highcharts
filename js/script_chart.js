@@ -38,6 +38,26 @@ function mapsChart(id, data) {
                     [1, '#000022']
                 ]
             },
+            plotOptions: {
+                series: {
+                    stacking: 'normal',
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function () {
+                                // alert(this.code);
+                                newData = filterDataFromChart1(data, this.code, "State_Code");
+                                // $("#chart2").empty();
+                                setValues(newData);
+                                columnchart("#chart2", newData, "Category", 'Sales by Sub-Category', 'Subtitle goes here');
+                                columnchart("#chart3", newData, "Sub_Category", 'Sales by Sub-Category', 'Subtitle goes here');
+                                scatterchart("#chart4", newData, "Segment", "Sales", "Discount");
+                            }
+                        }
+                    }
+                }
+            },
+
 
             series : [{
                 animation: {
@@ -233,7 +253,6 @@ function piechart(id, data, columnName) {
                         columnchart("#chart3", newData, "Sub_Category", 'Sales by Sub-Category', 'Subtitle goes here');
                         scatterchart("#chart4", newData, "Segment", "Sales", "Discount");
                         mapsChart("#maps_container", newData);
-
                     }
                 }
             }
@@ -254,7 +273,7 @@ function filterDataFromChart1(data, filterValue, columnName) {
         .ToArray();
         // .Where("$.Region == 'East' ")
 
-console.log(aggregatedObject);
+// console.log(aggregatedObject);
 return aggregatedObject;
 
 }
@@ -312,6 +331,28 @@ function columnchart(id, data, columnName, title, subtitle) {
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
+            },
+            series: {
+                stacking: 'normal',
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            // alert(this.category);
+                            if(columnName == "Category"){
+                            newData = filterDataFromChart1(data, this.category, "Category");
+                            setValues(newData);
+                            columnchart("#chart3", newData, "Sub_Category", 'Sales by Sub-Category', 'Subtitle goes here');
+                            scatterchart("#chart4", newData, "Segment", "Sales", "Discount");
+                        } else {
+                            newData = filterDataFromChart1(data, this.category, "Sub_Category");
+                            setValues(newData);
+                            scatterchart("#chart4", newData, "Segment", "Sales", "Discount");
+
+                        }
+                        }
+                    }
+                }
             }
         },
         series: [{
