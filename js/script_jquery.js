@@ -28,7 +28,7 @@ function callAjax() {
     }).done(function (dt) {
         	allData = dt;
 
-			setValues();
+			setValues(allData);
 			// piechart("#chart1", allData, allData.pie);
 			// columnchart("#chart2", allData, allData.category,'Sales by Category', 'Subtitle goes here');
 			// columnchart("#chart3", allData, allData.sub_category,'Sales by Sub-Category', 'Subtitle goes here');
@@ -42,28 +42,25 @@ function callAjax() {
     });
 }
 
-function setValues() {
+function setValues(data) {
 
-	salesValue = getSales();
-	quantityValue = getQuantity();
-	discountValue = getDiscount();
-	profitValue = getProfit();
+	salesValue = getSales(data);
+	quantityValue = getQuantity(data);
+	discountValue = getDiscount(data);
+	profitValue = getProfit(data);
 
-/*  $(".rowTopNumber1").text((allData.Sales).toFixed(0));
-	$(".rowTopNumber2").text((allData.Quantity).toFixed(0));
-	$(".rowTopNumber3").text(((allData.Discount)*100).toFixed(0) + "%");
-	$(".rowTopNumber4").text((allData.Profit).toFixed(0));*/
+
 	$(".rowTopNumber1").text(salesValue);
 	$(".rowTopNumber2").text(quantityValue);
 	$(".rowTopNumber3").text(discountValue);
 	$(".rowTopNumber4").text(profitValue);
 }
 
-function getSales() {
+function getSales(data) {
 
 	 var sum = 0;
 
-    $.each(allData, function () {
+    $.each(data, function () {
         sum = sum + this["Sales"];
     });
 
@@ -71,11 +68,11 @@ function getSales() {
 
 }
 
-function getQuantity() {
+function getQuantity(data) {
 
 	 var sum = 0;
 
-    $.each(allData, function () {
+    $.each(data, function () {
         sum = sum + this["Quantity"];
     });
 
@@ -83,12 +80,12 @@ function getQuantity() {
 
 }
 
-function getDiscount() {
+function getDiscount(data) {
 
 	 var sum = 0;
 	 var count = 0;
 
-    $.each(allData, function () {
+    $.each(data, function () {
         sum = sum + this["Discount"];
         count = count + 1;
     });
@@ -97,11 +94,11 @@ function getDiscount() {
 
 }
 
-function getProfit() {
+function getProfit(data) {
 
 	 var sum = 0;
 
-    $.each(allData, function () {
+    $.each(data, function () {
         sum = sum + this["Profit"];
     });
 
