@@ -37,6 +37,11 @@ function callAjax() {
 			// scatterchart("#chart4", allData, allData.scatter);
 			// mapsChart("#maps_container", allData, allData.maps);
 
+			$("#reset").click(function(){
+			    setValues(allData);
+			    drawCharts(allData);
+			});
+
 
     }).fail(function (dt) {
     	$("#testing").text("Failed");
