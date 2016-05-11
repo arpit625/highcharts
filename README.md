@@ -6,10 +6,8 @@ Current Version :
 - Using PHP for backend processes
 - Improve UI
 - Implement Maps
+- Process data in the front end
 
 Next Version : 
-- Process data in the front end
-- Make the variable dynamic which needs to aggregated. As of now its hard coded to "Sales" at majority of the places
-
-Next to Next Version : 
 - Implement interactivity between the charts
+- Make the variable dynamic which needs to aggregated. As of now its hard coded to "Sales" at majority of the places
