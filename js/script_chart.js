@@ -218,6 +218,26 @@ function piechart(id, data, columnName) {
                 }
             }
         }
+        ,
+        series: {
+            stacking: 'normal',
+            cursor: 'pointer',
+            point: {
+                events: {
+                    click: function () {
+                        // alert(this.name);
+                        newData = filterDataFromChart1(data, this.name, "Region");
+                        // $("#chart2").empty();
+                        setValues(newData);
+                        columnchart("#chart2", newData, "Category", 'Sales by Category', 'Subtitle goes here');
+                        columnchart("#chart3", newData, "Sub_Category", 'Sales by Sub-Category', 'Subtitle goes here');
+                        scatterchart("#chart4", newData, "Segment", "Sales", "Discount");
+                        mapsChart("#maps_container", newData);
+
+                    }
+                }
+            }
+        }
     },
     series: [{
         name: 'Brands',
@@ -225,6 +245,18 @@ function piechart(id, data, columnName) {
         data : pieData
     }]
 });
+}
+
+function filterDataFromChart1(data, filterValue, columnName) {
+
+    var aggregatedObject = Enumerable.From(data)
+        .Where("$." + columnName + " == '" + filterValue + "'")
+        .ToArray();
+        // .Where("$.Region == 'East' ")
+
+console.log(aggregatedObject);
+return aggregatedObject;
+
 }
 
 function getPieChartData(data, columnName) {
