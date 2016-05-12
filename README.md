@@ -15,4 +15,5 @@ Next Version :
 - Make a flag for each variable
 - Flexibility to user to drill down by clicking on randomly on any chart
 - Use a breadcrumb to show the order of filter
+- Add drop down filter on the left panel
 
